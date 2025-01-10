@@ -1,58 +1,11 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
 import yargs from 'yargs';
-
-// Reformat data based on the provided parser and formatter.
-const reformatData = async (inputData: string, parser: Parser, lineFormatter: LineFormatter) => {
-  const parsedData = parser(inputData);
-
-  let outputFileContent = '';
-  for (const entry of parsedData) {
-    const formattedLine = lineFormatter(entry);
-    if (formattedLine !== null) {
-      outputFileContent += `${formattedLine}\n`;
-    }
-  }
-
-  return outputFileContent;
-};
-
-// Parser for AncestryDNA format.
-const twenty3andMeParser: Parser = (inputData) => {
-  return inputData
-    .split('\n')
-    .filter((line) => !line.startsWith('#'))
-    .map((line) => {
-      const [rsId, chromosome, position, alleles] = line.trim().split('\t');
-      return { rsId, chromosome, position, alleles };
-    });
-};
-
-// Parser for Twenty3andMe format.
-const ancestryDnaParser: Parser = (inputData) => {
-  return inputData
-    .split('\n')
-    .filter((line) => !line.startsWith('#') && line.includes('\t'))
-    .map((line) => {
-      const [rsId, chromosome, position, allele1, allele2] = line.trim().split('\t');
-      return {
-        rsId,
-        chromosome,
-        position,
-        alleles: `${allele1[0]}${allele2[0]}`,
-      };
-    });
-};
-
-// Formatter for Twenty3andMe.
-const twenty3andMeFormatter: LineFormatter = ({ rsId, chromosome, position, alleles }) => {
-  return `${rsId}\t${chromosome}\t${position}\t${alleles}`;
-};
-
-// Formatter for AncestryDNA.
-const ancestryFormatter: LineFormatter = ({ rsId, chromosome, position, alleles }) => {
-  return `${rsId}\t${chromosome}\t${position}\t${alleles[0]}\t${alleles[1]}`;
-};
+import ancestryDnaParser from './parsers/AncestryDnaParser';
+import twenty3andMeParser from './parsers/Twenty3andMeDnaParser';
+import ancestryFormatter from './formatters/AncestryDnaFormatter';
+import twenty3andMeFormatter from './formatters/Twenty3andMeFormatter';
+import reformatData from './ReformatData';
 
 const argv = yargs(process.argv.slice(2))
   .usage('Usage: $0 -i <inputFile> -o <outputFile> --toFormat <format> [--fromFormat <format>]')
