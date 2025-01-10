@@ -7,7 +7,6 @@ Practice CLI to convert Ancestry RAW DNA files to 23andMe format and back again
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Installation
 
@@ -20,15 +19,21 @@ Practice CLI to convert Ancestry RAW DNA files to 23andMe format and back again
 
 2. Install Dependencies:
 
-npm install
+   ```sh
+   npm install
+   ```
 
 3. Compile TypeScript to JavaScript:
 
-npm run build
+   ```sh
+   npm run build
+   ```
 
 ## Usage
 
-node ./dist/DnaFormatConverter.js -i .\AncestryDNA.txt
+   ```sh
+   node ./dist/DnaFormatConverter.js -i .\AncestryDNA.txt
+   ```
 
 ## Contributing
 
@@ -36,22 +41,30 @@ Contributions are welcome! Please feel free to open issues or submit pull reques
 
 1. Fork the Repository:
 
-git clone https://github.com/barretts/dna-format-converter.git
-cd dna-format-converter
+   ```sh
+   git clone https://github.com/barretts/dna-format-converter.git
+   cd dna-format-converter
+   ```
 
 2. Create a New Branch:
 
-git checkout -b feature/new-feature
+   ```sh
+   git checkout -b feature/new-feature
+   ```
 
 3. Make Your Changes and Commit Them:
 
-git add .
-git commit -m "Add new feature"
+   ```sh
+   git add .
+   git commit -m "Add new feature"
+   ```
 
 4. Push to the Branch:
 
-git push origin feature/new-feature
+   ```sh
+   git push origin feature/new-feature
+   ```
 
 5. Open a Pull Request:
 
-Go to the GitHub repository and click on the "Compare & pull request" button.
+   Go to the GitHub repository and click on the "Compare & pull request" button.
